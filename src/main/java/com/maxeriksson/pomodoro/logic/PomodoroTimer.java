@@ -16,8 +16,7 @@ public class PomodoroTimer {
 
     public PomodoroTimer() {
         state = PomodoroState.FOCUS;
-        startSeconds = 25 * 60;
-        secondsLeft = startSeconds;
+        reset();
 
         final int SECOND_IN_MILLISECONDS = 1000;
         TIMER =
@@ -31,9 +30,21 @@ public class PomodoroTimer {
                         });
     }
 
+    private void reset() {
+        startSeconds = 25 * 60;
+        secondsLeft = startSeconds;
+    }
+
     public void start() {
         if (!TIMER.isRunning()) {
             TIMER.start();
+        }
+    }
+
+    public void stop() {
+        if (TIMER.isRunning()) {
+            TIMER.stop();
+            reset();
         }
     }
 

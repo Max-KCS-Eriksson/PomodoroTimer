@@ -1,5 +1,6 @@
 package com.maxeriksson.pomodoro.ui;
 
+import com.maxeriksson.pomodoro.logic.PomodoroTimer;
 import com.maxeriksson.pomodoro.ui.panels.ControlPanel;
 import com.maxeriksson.pomodoro.ui.panels.TimerPanel;
 
@@ -12,6 +13,7 @@ public class PomodoroUI {
 
     private JFrame frame;
 
+    private PomodoroTimer timer;
     private TimerPanel timerPanel;
     private ControlPanel controlPanel;
 
@@ -21,8 +23,9 @@ public class PomodoroUI {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        timerPanel = new TimerPanel();
-        controlPanel = new ControlPanel();
+        timer = new PomodoroTimer();
+        timerPanel = new TimerPanel(timer);
+        controlPanel = new ControlPanel(timer);
 
         frame.add(timerPanel.getPanel(), BorderLayout.NORTH);
         frame.add(controlPanel.getPanel(), BorderLayout.SOUTH);

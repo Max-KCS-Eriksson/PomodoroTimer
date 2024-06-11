@@ -16,10 +16,10 @@ public class TimerPanel {
     private JLabel stateLabel;
     private JLabel timerLabel;
 
-    public TimerPanel() {
+    public TimerPanel(PomodoroTimer timer) {
         panel = new JPanel(new GridLayout(2, 1, 0, 25));
 
-        timer = new PomodoroTimer();
+        this.timer = timer;
         stateLabel = new JLabel();
         timerLabel = new JLabel();
         stateLabel.setText(timer.getState());
