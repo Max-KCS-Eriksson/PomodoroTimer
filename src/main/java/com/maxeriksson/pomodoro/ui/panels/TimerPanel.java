@@ -3,9 +3,12 @@ package com.maxeriksson.pomodoro.ui.panels;
 import com.maxeriksson.pomodoro.logic.PomodoroTimer;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /** TimerPanel */
 public class TimerPanel {
@@ -22,13 +25,19 @@ public class TimerPanel {
         this.timer = timer;
         stateLabel = new JLabel();
         timerLabel = new JLabel();
-        stateLabel.setText(timer.getState());
-        timerLabel.setText(formatSecondsToClock(timer.getSecondsLeft()));
+        setTimerLabelTexts(timer);
 
         stateLabel.setHorizontalAlignment(JLabel.CENTER);
         timerLabel.setHorizontalAlignment(JLabel.CENTER);
         panel.add(stateLabel);
         panel.add(timerLabel);
+
+        refreshingPanel();
+    }
+
+    private void setTimerLabelTexts(PomodoroTimer timer) {
+        stateLabel.setText(timer.getState());
+        timerLabel.setText(formatSecondsToClock(timer.getSecondsLeft()));
     }
 
     private String formatSecondsToClock(int secondsLeft) {
@@ -41,6 +50,20 @@ public class TimerPanel {
                 .append(':')
                 .append(String.format(FMT, seconds))
                 .toString();
+    }
+
+    private void refreshingPanel() {
+        final int SECOND_IN_MILLISECONDS = 1000;
+        Timer panelRefresher =
+                new Timer(
+                        SECOND_IN_MILLISECONDS,
+                        new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                setTimerLabelTexts(timer);
+                            }
+                        });
+        panelRefresher.start();
     }
 
     public JPanel getPanel() {
