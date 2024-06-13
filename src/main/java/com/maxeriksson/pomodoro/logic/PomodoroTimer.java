@@ -25,9 +25,13 @@ public class PomodoroTimer {
                         new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                secondsLeft -= 1;
+                                runTimer();
                             }
                         });
+    }
+
+    private void runTimer() {
+        secondsLeft -= 1;
     }
 
     private void reset() {
