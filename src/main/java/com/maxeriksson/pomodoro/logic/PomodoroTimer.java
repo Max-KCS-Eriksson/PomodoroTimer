@@ -38,6 +38,7 @@ public class PomodoroTimer {
             secondsLeft -= 1;
         } else {
             determineNextState();
+            TIMER.stop();
         }
     }
 
