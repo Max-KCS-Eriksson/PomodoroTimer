@@ -11,11 +11,15 @@ public class PomodoroTimer {
     private final Timer TIMER;
 
     private PomodoroState state;
+    private final int NUM_OF_SETS;
+    private int focusBreakSet;
     private int startSeconds;
     private int secondsLeft;
 
     public PomodoroTimer() {
         reset(PomodoroState.FOCUS);
+        NUM_OF_SETS = 4;
+        focusBreakSet = 0;
 
         final int SECOND_IN_MILLISECONDS = 1000;
         TIMER =
@@ -30,7 +34,23 @@ public class PomodoroTimer {
     }
 
     private void runTimer() {
-        secondsLeft -= 1;
+        if (secondsLeft > 0) {
+            secondsLeft -= 1;
+        } else {
+            determineNextState();
+        }
+    }
+
+    private void determineNextState() {
+        if (state != PomodoroState.FOCUS) {
+            reset(PomodoroState.FOCUS);
+        } else {
+            if (focusBreakSet < NUM_OF_SETS) {
+                reset(PomodoroState.SHORT_BREAK);
+            } else {
+                reset(PomodoroState.LONG_BREAK);
+            }
+        }
     }
 
     private void reset(PomodoroState state) {
@@ -41,9 +61,11 @@ public class PomodoroTimer {
                 break;
             case SHORT_BREAK:
                 startMinutes = 5;
+                focusBreakSet += 1;
                 break;
             case LONG_BREAK:
                 startMinutes = 15;
+                focusBreakSet = 0;
                 break;
         }
         this.state = state;
