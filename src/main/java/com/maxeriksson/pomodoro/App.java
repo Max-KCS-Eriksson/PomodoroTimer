@@ -1,5 +1,6 @@
 package com.maxeriksson.pomodoro;
 
+import com.maxeriksson.pomodoro.logic.PomodoroTimer;
 import com.maxeriksson.pomodoro.ui.PomodoroUI;
 
 import javax.swing.SwingUtilities;
@@ -11,7 +12,8 @@ public class App {
                 new Runnable() {
                     @Override
                     public void run() {
-                        new PomodoroUI();
+                        PomodoroTimer timer = new PomodoroTimer();
+                        new PomodoroUI(timer);
                     }
                 });
     }

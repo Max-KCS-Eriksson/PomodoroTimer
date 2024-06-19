@@ -13,17 +13,15 @@ public class PomodoroUI {
 
     private JFrame frame;
 
-    private PomodoroTimer timer;
     private TimerPanel timerPanel;
     private ControlPanel controlPanel;
 
-    public PomodoroUI() {
+    public PomodoroUI(PomodoroTimer timer) {
         frame = new JFrame("Pomodoro");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        timer = new PomodoroTimer();
         timerPanel = new TimerPanel(timer);
         controlPanel = new ControlPanel(timer);
 
