@@ -1,5 +1,7 @@
 package com.maxeriksson.pomodoro.logic;
 
+import com.maxeriksson.pomodoro.logic.settings.PomodoroSettings;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,13 +12,15 @@ public class PomodoroTimer {
 
     private final Timer TIMER;
 
+    private PomodoroSettings pomodoroSettings;
     private PomodoroState state;
     private final int NUM_OF_SETS;
     private int focusBreakSet;
     private int startSeconds;
     private int secondsLeft;
 
-    public PomodoroTimer() {
+    public PomodoroTimer(PomodoroSettings pomodoroSettings) {
+        this.pomodoroSettings = pomodoroSettings;
         reset(PomodoroState.FOCUS);
         NUM_OF_SETS = 4;
         focusBreakSet = 0;
@@ -58,14 +62,14 @@ public class PomodoroTimer {
         int startMinutes = 0;
         switch (state) {
             case FOCUS:
-                startMinutes = 25;
+                startMinutes = pomodoroSettings.getFocusMinutes();
                 break;
             case SHORT_BREAK:
-                startMinutes = 5;
+                startMinutes = pomodoroSettings.getShortBreakMinutes();
                 focusBreakSet += 1;
                 break;
             case LONG_BREAK:
-                startMinutes = 15;
+                startMinutes = pomodoroSettings.getLongBreakMinutes();
                 focusBreakSet = 0;
                 break;
         }
