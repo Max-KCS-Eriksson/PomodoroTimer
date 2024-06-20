@@ -84,6 +84,12 @@ public class PomodoroTimer {
         }
     }
 
+    public void pause() {
+        if (TIMER.isRunning()) {
+            TIMER.stop();
+        }
+    }
+
     public void stop() {
         if (TIMER.isRunning()) {
             TIMER.stop();
