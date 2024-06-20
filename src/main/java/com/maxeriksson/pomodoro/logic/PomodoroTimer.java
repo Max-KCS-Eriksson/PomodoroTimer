@@ -93,8 +93,8 @@ public class PomodoroTimer {
     public void stop() {
         if (TIMER.isRunning()) {
             TIMER.stop();
-            reset(PomodoroState.FOCUS);
         }
+        reset(PomodoroState.FOCUS);
     }
 
     public String getState() {
