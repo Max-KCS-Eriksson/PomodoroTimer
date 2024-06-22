@@ -5,6 +5,7 @@ import com.maxeriksson.pomodoro.ui.panels.ControlPanel;
 import com.maxeriksson.pomodoro.ui.panels.TimerPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
@@ -20,6 +21,7 @@ public class PomodoroUI {
         frame = new JFrame("Pomodoro");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame.setMinimumSize(new Dimension(400, 400));
         frame.setVisible(true);
 
         timerPanel = new TimerPanel(timer);
