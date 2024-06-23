@@ -82,6 +82,7 @@ public class TimerSettings implements ActionListener {
             focusMinutes -= PomodoroSettings.MIN_FOCUS_MINUTES;
         } else if (event.getSource() == applyChanges) {
             timer.updateSettings();
+            dialog.dispose();
         }
 
         boolean exception = false;
