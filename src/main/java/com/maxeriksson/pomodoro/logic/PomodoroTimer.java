@@ -104,4 +104,8 @@ public class PomodoroTimer {
     public int getSecondsLeft() {
         return secondsLeft;
     }
+
+    public PomodoroSettings getSettings() {
+        return pomodoroSettings;
+    }
 }
