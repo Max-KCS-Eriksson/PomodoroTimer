@@ -108,4 +108,8 @@ public class PomodoroTimer {
     public PomodoroSettings getSettings() {
         return pomodoroSettings;
     }
+
+    public void updateSettings() {
+        reset(state);
+    }
 }
