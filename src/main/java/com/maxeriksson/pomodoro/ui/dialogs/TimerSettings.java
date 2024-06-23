@@ -72,9 +72,9 @@ public class TimerSettings implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         int focusMinutes = settings.getFocusMinutes();
         if (event.getSource() == increaseFocusMinutes) {
-            focusMinutes += 5;
+            focusMinutes += PomodoroSettings.MIN_FOCUS_MINUTES;
         } else if (event.getSource() == decreaseFocusMinutes) {
-            focusMinutes -= 5;
+            focusMinutes -= PomodoroSettings.MIN_FOCUS_MINUTES;
         }
 
         boolean exception = false;
