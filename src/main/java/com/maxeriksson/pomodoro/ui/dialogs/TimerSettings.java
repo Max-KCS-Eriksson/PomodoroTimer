@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,6 +33,7 @@ public class TimerSettings implements ActionListener {
 
     private BasicArrowButton increaseFocusMinutes;
     private BasicArrowButton decreaseFocusMinutes;
+    private JButton applyChanges;
 
     public TimerSettings(PomodoroTimer timer) {
         dialog = new JDialog();
@@ -55,9 +57,12 @@ public class TimerSettings implements ActionListener {
         JPanel controls = new JPanel();
         increaseFocusMinutes = new BasicArrowButton(BasicArrowButton.NORTH);
         decreaseFocusMinutes = new BasicArrowButton(BasicArrowButton.SOUTH);
+        applyChanges = new JButton("OK");
         increaseFocusMinutes.addActionListener(this);
         decreaseFocusMinutes.addActionListener(this);
+        applyChanges.addActionListener(this);
         controls.add(increaseFocusMinutes);
+        controls.add(applyChanges);
         controls.add(decreaseFocusMinutes);
 
         heading.setHorizontalAlignment(JLabel.CENTER);
@@ -75,6 +80,8 @@ public class TimerSettings implements ActionListener {
             focusMinutes += PomodoroSettings.MIN_FOCUS_MINUTES;
         } else if (event.getSource() == decreaseFocusMinutes) {
             focusMinutes -= PomodoroSettings.MIN_FOCUS_MINUTES;
+        } else if (event.getSource() == applyChanges) {
+            timer.updateSettings();
         }
 
         boolean exception = false;
