@@ -1,6 +1,7 @@
 package com.maxeriksson.pomodoro.logic;
 
 import com.maxeriksson.pomodoro.logic.settings.PomodoroSettings;
+import com.maxeriksson.pomodoro.notifications.Notifier;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import javax.swing.Timer;
 public class PomodoroTimer {
 
     private final Timer TIMER;
+    private final Notifier NOTIFIER;
 
     private PomodoroSettings pomodoroSettings;
     private PomodoroState state;
@@ -35,14 +37,20 @@ public class PomodoroTimer {
                                 runTimer();
                             }
                         });
+
+        NOTIFIER = new Notifier();
     }
 
     private void runTimer() {
         if (secondsLeft > 0) {
             secondsLeft -= 1;
+            if (secondsLeft == (startSeconds / PomodoroSettings.MIN_FOCUS_MINUTES)) {
+                NOTIFIER.timeAlmostUp();
+            }
         } else {
             determineNextState();
             TIMER.stop();
+            NOTIFIER.timeIsUp();
         }
     }
 
